@@ -15,7 +15,9 @@ export interface RsvpRecord {
 
 @Injectable()
 export class RsvpService {
-  constructor(@Inject(SUPABASE_CLIENT) private readonly supabase: SupabaseClient) {}
+  constructor(
+    @Inject(SUPABASE_CLIENT) private readonly supabase: SupabaseClient,
+  ) {}
 
   async upsert(token: string, dto: UpsertRsvpDto): Promise<RsvpRecord> {
     const guest = await this.getGuestByToken(token);

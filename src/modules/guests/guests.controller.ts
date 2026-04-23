@@ -1,7 +1,12 @@
 import { Controller, Get, Param } from '@nestjs/common';
-import { ApiOkResponse, ApiNotFoundResponse, ApiTags, ApiParam } from '@nestjs/swagger';
-import { GuestsService } from './guests.service.js';
+import {
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 import { GuestResponseDto } from './dto/guest-response.dto.js';
+import { GuestsService } from './guests.service.js';
 
 @ApiTags('guests')
 @Controller('guests')

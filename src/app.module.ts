@@ -6,11 +6,7 @@ import { GuestsModule } from './modules/guests/guests.module.js';
 import { RsvpModule } from './modules/rsvp/rsvp.module.js';
 
 @Module({
-  imports: [
-    ConfigModule.forRoot({ isGlobal: true }),
-    GuestsModule,
-    RsvpModule,
-  ],
+  imports: [ConfigModule.forRoot({ isGlobal: true }), GuestsModule, RsvpModule],
   controllers: [AppController],
   providers: [AppService],
 })

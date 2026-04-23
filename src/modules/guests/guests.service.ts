@@ -5,7 +5,9 @@ import { GuestResponseDto } from './dto/guest-response.dto.js';
 
 @Injectable()
 export class GuestsService {
-  constructor(@Inject(SUPABASE_CLIENT) private readonly supabase: SupabaseClient) {}
+  constructor(
+    @Inject(SUPABASE_CLIENT) private readonly supabase: SupabaseClient,
+  ) {}
 
   async findByToken(token: string): Promise<GuestResponseDto> {
     const { data, error } = await this.supabase

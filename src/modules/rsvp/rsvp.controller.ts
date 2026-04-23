@@ -1,8 +1,14 @@
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
-import { ApiBody, ApiOkResponse, ApiNotFoundResponse, ApiTags, ApiParam } from '@nestjs/swagger';
-import { RsvpService, RsvpRecord } from './rsvp.service.js';
-import { UpsertRsvpDto } from './dto/upsert-rsvp.dto.js';
+import {
+  ApiBody,
+  ApiNotFoundResponse,
+  ApiOkResponse,
+  ApiParam,
+  ApiTags,
+} from '@nestjs/swagger';
 import { GuestToken } from '../../common/decorators/guest.decorator.js';
+import { UpsertRsvpDto } from './dto/upsert-rsvp.dto.js';
+import { RsvpRecord, RsvpService } from './rsvp.service.js';
 
 @ApiTags('rsvp')
 @Controller('rsvp')
@@ -13,7 +19,10 @@ export class RsvpController {
   @ApiBody({ type: UpsertRsvpDto })
   @ApiOkResponse({ description: 'RSVP created or updated' })
   @ApiNotFoundResponse({ description: 'Guest not found' })
-  upsert(@GuestToken() token: string, @Body() dto: UpsertRsvpDto): Promise<RsvpRecord> {
+  upsert(
+    @GuestToken() token: string,
+    @Body() dto: UpsertRsvpDto,
+  ): Promise<RsvpRecord> {
     return this.rsvpService.upsert(token, dto);
   }
 
