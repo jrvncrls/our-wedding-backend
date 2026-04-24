@@ -1,12 +1,12 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { SupabaseClient } from '@supabase/supabase-js';
 import { SUPABASE_CLIENT } from '../../config/supabase.config.js';
+import type { TypedSupabaseClient } from '../../config/supabase.config.js';
 import { GuestResponseDto } from './dto/guest-response.dto.js';
 
 @Injectable()
 export class GuestsService {
   constructor(
-    @Inject(SUPABASE_CLIENT) private readonly supabase: SupabaseClient,
+    @Inject(SUPABASE_CLIENT) private readonly supabase: TypedSupabaseClient,
   ) {}
 
   async findByToken(token: string): Promise<GuestResponseDto> {
@@ -25,6 +25,6 @@ export class GuestsService {
       .update({ last_open_link_date: new Date().toISOString() })
       .eq('token', token);
 
-    return data as GuestResponseDto;
+    return data;
   }
 }
