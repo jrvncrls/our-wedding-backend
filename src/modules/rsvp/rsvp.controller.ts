@@ -1,9 +1,9 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import {
   ApiBody,
   ApiNotFoundResponse,
   ApiOkResponse,
-  ApiParam,
+  ApiQuery,
   ApiTags,
 } from '@nestjs/swagger';
 import { GuestToken } from '../../common/decorators/guest.decorator.js';
@@ -16,6 +16,7 @@ export class RsvpController {
   constructor(private readonly rsvpService: RsvpService) {}
 
   @Post()
+  @ApiQuery({ name: 'token', description: 'Guest invite token' })
   @ApiBody({ type: UpsertRsvpDto })
   @ApiOkResponse({ description: 'RSVP created or updated' })
   @ApiNotFoundResponse({ description: 'Guest not found' })
@@ -26,11 +27,11 @@ export class RsvpController {
     return this.rsvpService.upsert(token, dto);
   }
 
-  @Get(':token')
-  @ApiParam({ name: 'token', description: 'Guest invite token' })
+  @Get()
+  @ApiQuery({ name: 'token', description: 'Guest invite token' })
   @ApiOkResponse({ description: 'Current RSVP for guest' })
   @ApiNotFoundResponse({ description: 'RSVP not found' })
-  findByToken(@Param('token') token: string): Promise<RsvpRecord> {
+  findByToken(@Query('token') token: string): Promise<RsvpRecord> {
     return this.rsvpService.findByToken(token);
   }
 }

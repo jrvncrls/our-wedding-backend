@@ -1,6 +1,6 @@
 import { Inject, Injectable, NotFoundException } from '@nestjs/common';
-import { SUPABASE_CLIENT } from '../../config/supabase.config.js';
 import type { TypedSupabaseClient } from '../../config/supabase.config.js';
+import { SUPABASE_CLIENT } from '../../config/supabase.config.js';
 import { GuestResponseDto } from './dto/guest-response.dto.js';
 
 @Injectable()
