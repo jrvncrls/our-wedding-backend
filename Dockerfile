@@ -1,5 +1,5 @@
 FROM node:22-alpine AS base
-RUN corepack enable && corepack prepare pnpm@latest --activate
+RUN corepack enable && corepack prepare pnpm@10.33.2 --activate
 WORKDIR /app
 
 FROM base AS deps
@@ -14,8 +14,6 @@ RUN pnpm build
 FROM base AS production
 ENV NODE_ENV=production
 COPY package.json pnpm-lock.yaml ./
-# IMPORTANT: allow scripts
-RUN pnpm config set ignore-scripts false
 RUN pnpm install --frozen-lockfile --prod
 COPY --from=build /app/dist ./dist
 
