@@ -4,10 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module.js';
 
 async function bootstrap() {
-  console.log(
-    'env keys containing SUPABASE:',
-    Object.keys(process.env).filter((k) => k.includes('SUPABASE')),
-  );
+  console.log('all env keys:', Object.keys(process.env).sort());
 
   const app = await NestFactory.create(AppModule);
 
