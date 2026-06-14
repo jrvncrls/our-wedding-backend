@@ -5,6 +5,8 @@ import { AppModule } from './app.module.js';
 
 async function bootstrap() {
   console.log('all env keys:', Object.keys(process.env).sort());
+  console.log('service:', process.env['RAILWAY_SERVICE_NAME']);
+  console.log('environment:', process.env['RAILWAY_ENVIRONMENT_NAME']);
 
   const app = await NestFactory.create(AppModule);
 
