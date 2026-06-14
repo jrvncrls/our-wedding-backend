@@ -4,6 +4,11 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module.js';
 
 async function bootstrap() {
+  console.log(
+    'env keys containing SUPABASE:',
+    Object.keys(process.env).filter((k) => k.includes('SUPABASE')),
+  );
+
   const app = await NestFactory.create(AppModule);
 
   app.enableCors();
