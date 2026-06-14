@@ -14,6 +14,8 @@ RUN pnpm build
 FROM base AS production
 ENV NODE_ENV=production
 COPY package.json pnpm-lock.yaml ./
+# IMPORTANT: allow scripts
+RUN pnpm config set ignore-scripts false
 RUN pnpm install --frozen-lockfile --prod
 COPY --from=build /app/dist ./dist
 
